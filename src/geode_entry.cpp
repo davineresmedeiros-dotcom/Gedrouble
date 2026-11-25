@@ -3,9 +3,12 @@
 
 using namespace geode::prelude;
 
+namespace {
+gedrouble::Loader g_loader;
+}
+
 $on_mod(Loaded) {
-    static gedrouble::Loader loader;
-    if (!loader.initialize()) {
+    if (!g_loader.initialize()) {
         log::error("Gedrouble Core initialization failed");
     } else {
         log::info("Gedrouble Core initialized through Geode");
@@ -13,6 +16,5 @@ $on_mod(Loaded) {
 }
 
 $on_mod(Unloaded) {
-    // Geode owns this integration's lifecycle. Core shutdown is handled by
-    // the host when the integration is unloaded.
+    g_loader.shutdown();
 }

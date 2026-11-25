@@ -1,23 +1,29 @@
-# Gedrouble
+# Gedrouble Loader
 
-Gedrouble is a Geometry Dash mod project built on top of Geode.
+Gedrouble is a **Geometry Dash mod loader project**. It is not a Geode mod and is not packaged as a `.geode` file.
 
-## Target
+The project is being built as its own native loader/core. Geode is an intended dependency/integration component; Gedrouble itself must remain the loader/host, not a plugin that Geode loads.
 
-- Geode: `v6.0.0-beta.1`
-- Geometry Dash: `2.2091`
-- Mod version: `v0.1.0`
+## Current state
 
-## Build
+- Native C++ loader-core scaffold
+- CMake build (shared library)
+- No game injection, mod discovery, or runtime loading implemented yet
 
-Install the matching Geode SDK and Geode CLI, then build from the project directory:
+## Build the core
 
 ```sh
-geode build
+cmake -S . -B build
+cmake --build build
 ```
 
-The project expects the `GEODE_SDK` environment variable to point to the installed SDK.
+The GitHub Actions workflow compiles the native core on Linux. This is only a core build check; it does **not** mean the loader is already able to load mods into Geometry Dash.
 
-## First milestone
+## Planned architecture
 
-The initial mod logs a startup message when Geode loads Gedrouble. After confirming that it builds and loads, we can add the first Gedrouble-specific interface and features.
+1. Loader application/bootstrap
+2. Loader core and mod management
+3. Geode integration adapter
+4. Android/Geometry Dash runtime integration
+
+The next implementation step is to choose and implement the actual runtime entry point for the target platform, then connect the loader core to it.

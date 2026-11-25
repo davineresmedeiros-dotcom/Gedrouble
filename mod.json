@@ -1,0 +1,12 @@
+{
+  "geode": "4.0.0",
+  "gd": {
+    "win": "2.2074",
+    "android": "2.2074"
+  },
+  "id": "gedrouble",
+  "name": "Gedrouble",
+  "version": "0.1.0",
+  "developer": "Gedrouble",
+  "description": "Gedrouble loader core hosted through Geode."
+}

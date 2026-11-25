@@ -1,21 +1,19 @@
 name: Build Gedrouble Loader
-
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
-
 jobs:
   build-loader-core:
-    name: Build native loader core
+    name: Build and test native loader core
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+        name: Checkout
       - name: Configure
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-
       - name: Compile loader core
         run: cmake --build build --config Release
+      - name: Test core lifecycle and version
+        run: ctest --test-dir build --output-on-failure
